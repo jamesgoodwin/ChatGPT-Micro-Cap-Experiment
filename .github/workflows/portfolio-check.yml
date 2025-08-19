@@ -109,6 +109,110 @@ jobs:
             exit(1)
         "
     
+    - name: Generate LLM prompt and call OpenAI API
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        python -c "
+        import os
+        import json
+        import requests
+        from trading_script import generate_chatgpt_prompt, load_latest_portfolio_state, generate_market_data
+        
+        # Load current portfolio data
+        portfolio_file = 'Scripts and CSV Files/chatgpt_portfolio_update.csv'
+        try:
+            portfolio, cash = load_latest_portfolio_state(portfolio_file)
+            print(f'📊 Loaded portfolio: {len(portfolio)} positions, \${cash:.2f} cash')
+        except Exception as e:
+            print(f'⚠️ Could not load portfolio data: {e}')
+            print('📝 Using empty portfolio for prompt generation')
+            import pandas as pd
+            portfolio = pd.DataFrame()
+            cash = 100.0
+        
+        # Generate the complete LLM prompt
+        try:
+            prompt = generate_chatgpt_prompt(portfolio, cash)
+            print(f'✅ Generated prompt: {len(prompt)} characters')
+            
+            # Save prompt to file for debugging
+            with open('generated_prompt.txt', 'w') as f:
+                f.write(prompt)
+            print('💾 Prompt saved to generated_prompt.txt')
+            
+        except Exception as e:
+            print(f'❌ Error generating prompt: {e}')
+            exit(1)
+        
+        # Call OpenAI API
+        api_key = os.getenv('OPENAI_API_KEY')
+        if not api_key:
+            print('❌ OPENAI_API_KEY not found in environment')
+            exit(1)
+        
+        headers = {
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json'
+        }
+        
+        data = {
+            'model': 'gpt-4',
+            'messages': [
+                {
+                    'role': 'user', 
+                    'content': prompt
+                }
+            ],
+            'max_tokens': 2000,
+            'temperature': 0.7
+        }
+        
+        try:
+            print('🤖 Calling OpenAI API...')
+            response = requests.post(
+                'https://api.openai.com/v1/chat/completions',
+                headers=headers,
+                json=data,
+                timeout=60
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                llm_response = result['choices'][0]['message']['content']
+                
+                print(f'✅ OpenAI API call successful')
+                print(f'📝 Response length: {len(llm_response)} characters')
+                
+                # Save LLM response to file
+                with open('llm_response.txt', 'w') as f:
+                    f.write(llm_response)
+                print('💾 LLM response saved to llm_response.txt')
+                
+                # Save usage stats
+                usage = result.get('usage', {})
+                stats = {
+                    'timestamp': __import__('datetime').datetime.now().isoformat(),
+                    'prompt_tokens': usage.get('prompt_tokens', 0),
+                    'completion_tokens': usage.get('completion_tokens', 0),
+                    'total_tokens': usage.get('total_tokens', 0),
+                    'model': data['model']
+                }
+                
+                with open('api_usage.json', 'w') as f:
+                    json.dump(stats, f, indent=2)
+                print(f'📊 Token usage: {stats[\"total_tokens\"]} total ({stats[\"prompt_tokens\"]} prompt + {stats[\"completion_tokens\"]} completion)')
+                
+            else:
+                print(f'❌ OpenAI API call failed: {response.status_code}')
+                print(f'Error: {response.text}')
+                exit(1)
+                
+        except Exception as e:
+            print(f'❌ Error calling OpenAI API: {e}')
+            exit(1)
+        "
+    
     - name: Run automated portfolio update
       run: |
         # Check if it's a weekday (when markets are open)
@@ -125,15 +229,16 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Actions Bot"
     
-    - name: Commit updated portfolio data
+    - name: Commit updated portfolio data and LLM responses
       run: |
         # Check if there are any changes to commit
         if [ -n "$(git status --porcelain)" ]; then
           echo "📝 Changes detected, committing updates..."
           git add "Scripts and CSV Files/chatgpt_portfolio_update.csv" "Scripts and CSV Files/chatgpt_trade_log.csv" || echo "No CSV changes to add"
+          git add generated_prompt.txt llm_response.txt api_usage.json || echo "No LLM files to add"
           
           # Create commit message with current date
-          COMMIT_MSG="Automated portfolio update - $(date '+%Y-%m-%d')"
+          COMMIT_MSG="Automated portfolio update with LLM analysis - $(date '+%Y-%m-%d')"
           git commit -m "$COMMIT_MSG" || echo "No changes to commit"
           
           # Push changes
