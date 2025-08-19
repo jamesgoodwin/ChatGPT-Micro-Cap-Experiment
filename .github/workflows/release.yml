@@ -60,11 +60,11 @@ jobs:
             
             summary = f'''## Portfolio Performance Summary
             
-**Period:** {first[\"Date\"]} to {latest[\"Date\"]} ({days} days)
+**Period:** {first['Date']} to {latest['Date']} ({days} days)
 **Starting Equity:** \${start_equity:.2f}
 **Ending Equity:** \${end_equity:.2f}
 **Total Return:** {total_return:+.2f}%
-**Latest Cash Balance:** \${latest[\"Cash Balance\"]:.2f}
+**Latest Cash Balance:** \${latest['Cash Balance']:.2f}
 
 ### Recent Holdings
 '''
@@ -94,8 +94,13 @@ jobs:
         print('Performance summary generated')
         "
     
-    - name: Generate changelog
+    - name: Generate release body
       run: |
+        # Combine performance summary and changelog
+        cat performance_summary.md > release_body.md
+        echo "" >> release_body.md
+        echo "" >> release_body.md
+        
         # Get commit messages since last tag
         LAST_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
         if [ -z "$LAST_TAG" ]; then
@@ -104,20 +109,19 @@ jobs:
           COMMITS=$(git log --pretty=format:"- %s" --no-merges ${LAST_TAG}..HEAD)
         fi
         
-        echo "## Changes in this release" > changelog.md
-        echo "" >> changelog.md
-        echo "$COMMITS" >> changelog.md
+        echo "## Changes in this release" >> release_body.md
+        echo "" >> release_body.md
+        echo "$COMMITS" >> release_body.md
     
     - name: Create Release
+      id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref_name }}
         release_name: Release ${{ github.ref_name }}
-        body_path: |
-          performance_summary.md
-          changelog.md
+        body_path: release_body.md
         draft: false
         prerelease: false
     
