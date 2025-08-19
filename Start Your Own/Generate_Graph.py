@@ -16,6 +16,10 @@ from typing import Optional, cast
 import matplotlib.pyplot as plt
 import pandas as pd
 import yfinance as yf
+import warnings
+
+# Suppress FutureWarnings from yfinance
+warnings.filterwarnings("ignore", category=FutureWarning, module="yfinance")
 
 DATA_DIR = Path(__file__).resolve().parent
 PORTFOLIO_CSV = DATA_DIR / "chatgpt_portfolio_update.csv"
@@ -82,7 +86,7 @@ def download_sp500(dates: pd.Series, starting_equity: float = 100.0) -> pd.DataF
     start_date = pd.to_datetime(dates.min())
     end_date = pd.to_datetime(dates.max())
 
-    sp500 = yf.download("^GSPC", start=start_date, end=end_date + pd.Timedelta(days=1), progress=False)
+    sp500 = yf.download("^GSPC", start=start_date, end=end_date + pd.Timedelta(days=1), auto_adjust=True, progress=False)
     sp500 = cast(pd.DataFrame, sp500)
 
     if sp500.empty or "Close" not in sp500.columns:

@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import yfinance as yf
+import warnings
+
+# Suppress FutureWarnings from yfinance
+warnings.filterwarnings("ignore", category=FutureWarning, module="yfinance")
 
 DATA_DIR = "Scripts and CSV Files"
 PORTFOLIO_CSV = f"{DATA_DIR}/chatgpt_portfolio_update.csv"
@@ -20,7 +24,7 @@ def load_portfolio_totals() -> pd.DataFrame:
 
 def download_sp500(start_date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DataFrame:
     """Download S&P 500 prices and normalise to a $100 baseline."""
-    sp500 = yf.download("^SPX", start=start_date, end=end_date + pd.Timedelta(days=1), progress=False)
+    sp500 = yf.download("^SPX", start=start_date, end=end_date + pd.Timedelta(days=1), auto_adjust=True, progress=False)
     sp500 = sp500.reset_index()
     if isinstance(sp500.columns, pd.MultiIndex):
         sp500.columns = sp500.columns.get_level_values(0)

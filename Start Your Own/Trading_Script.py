@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Wrapper for the shared trading script using local data directory."""
 
 from pathlib import Path

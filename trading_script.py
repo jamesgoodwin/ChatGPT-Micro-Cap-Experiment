@@ -14,6 +14,10 @@ import yfinance as yf
 from typing import Any, cast
 import os
 import time
+import warnings
+
+# Suppress FutureWarnings from yfinance
+warnings.filterwarnings("ignore", category=FutureWarning, module="yfinance")
 
 # Shared file locations
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -403,7 +407,7 @@ If this is a mistake, enter 1. """
             f"Manual sell for {ticker} failed: trying to sell {shares_sold} shares but only own {total_shares}."
         )
         return cash, chatgpt_portfolio
-    data = yf.download(ticker, period="1d")
+    data = yf.download(ticker, period="1d", auto_adjust=True, progress=False)
     data = cast(pd.DataFrame, data)
     if data.empty:
         print(f"Manual sell for {ticker} failed: no market data available.")
@@ -451,6 +455,121 @@ If this is a mistake, enter 1. """
     return cash, chatgpt_portfolio
 
 
+def generate_chatgpt_prompt(chatgpt_portfolio: pd.DataFrame, cash: float) -> str:
+    """Generate complete ChatGPT prompt including base prompt and current portfolio state."""
+    
+    # Read the base prompt from Prompts.md
+    prompts_file = SCRIPT_DIR / "Experiment Details" / "Prompts.md"
+    try:
+        with open(prompts_file, 'r', encoding='utf-8') as f:
+            base_prompt = f.read().strip()
+    except FileNotFoundError:
+        base_prompt = "You are a professional-grade portfolio strategist managing a micro-cap stock portfolio."
+    
+    # Get current portfolio summary
+    portfolio_summary = generate_portfolio_summary(chatgpt_portfolio, cash)
+    
+    # Get market data for key indices
+    market_data = generate_market_data()
+    
+    # Combine everything into the complete prompt
+    complete_prompt = f"""{base_prompt}
+
+=== CURRENT PORTFOLIO STATUS ({today}) ===
+
+{portfolio_summary}
+
+=== MARKET DATA ===
+
+{market_data}
+
+=== YOUR TASK ===
+
+Based on the above portfolio status and market conditions, please review my current positions and provide your recommendations for today. You may:
+- Hold current positions
+- Buy new positions (with available cash)
+- Sell existing positions
+- Adjust stop-loss levels
+
+Please provide specific trade instructions if you recommend any changes."""
+
+    return complete_prompt
+
+
+def generate_portfolio_summary(chatgpt_portfolio: pd.DataFrame, cash: float) -> str:
+    """Generate a formatted summary of the current portfolio."""
+    if chatgpt_portfolio.empty:
+        return f"Portfolio: Empty\nCash Balance: ${cash:.2f}\nTotal Equity: ${cash:.2f}"
+    
+    summary_lines = []
+    total_value = 0.0
+    total_pnl = 0.0
+    
+    summary_lines.append("Current Holdings:")
+    for _, stock in chatgpt_portfolio.iterrows():
+        ticker = stock["ticker"]
+        shares = int(stock["shares"])
+        buy_price = stock["buy_price"]
+        cost_basis = stock["cost_basis"]
+        stop_loss = stock["stop_loss"]
+        
+        # Get current price
+        try:
+            data = yf.Ticker(ticker).history(period="1d")
+            if not data.empty:
+                current_price = round(float(data["Close"].iloc[-1]), 2)
+                current_value = round(current_price * shares, 2)
+                pnl = round((current_price - buy_price) * shares, 2)
+                pnl_pct = round((current_price - buy_price) / buy_price * 100, 2)
+                
+                total_value += current_value
+                total_pnl += pnl
+                
+                summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} (Current: ${current_price:.2f}) | Value: ${current_value:.2f} | P&L: ${pnl:.2f} ({pnl_pct:+.1f}%) | Stop: ${stop_loss:.2f}")
+            else:
+                summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} | Stop: ${stop_loss:.2f} (No current price data)")
+        except Exception:
+            summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} | Stop: ${stop_loss:.2f} (Price data unavailable)")
+    
+    summary_lines.append(f"\nCash Balance: ${cash:.2f}")
+    summary_lines.append(f"Total Portfolio Value: ${total_value + cash:.2f}")
+    summary_lines.append(f"Total P&L: ${total_pnl:.2f}")
+    
+    return "\n".join(summary_lines)
+
+
+def generate_market_data() -> str:
+    """Generate formatted market data for key indices."""
+    market_lines = []
+    
+    indices = [
+        ("^RUT", "Russell 2000 (Small Caps)"),
+        ("IWO", "iShares Russell 2000 Growth ETF"),
+        ("XBI", "SPDR S&P Biotech ETF"),
+        ("^SPX", "S&P 500")
+    ]
+    
+    for ticker, name in indices:
+        try:
+            data = yf.download(ticker, period="2d", auto_adjust=True, progress=False)
+            data = cast(pd.DataFrame, data)
+            if data.empty or len(data) < 2:
+                market_lines.append(f"{name} ({ticker}): Data unavailable")
+                continue
+                
+            current_price = float(data["Close"].iloc[-1].item())
+            prev_price = float(data["Close"].iloc[-2].item())
+            percent_change = ((current_price - prev_price) / prev_price) * 100
+            volume = float(data["Volume"].iloc[-1].item()) if "Volume" in data.columns else 0
+            
+            market_lines.append(f"{name} ({ticker}): ${current_price:.2f} ({percent_change:+.2f}%) | Volume: {volume:,.0f}")
+            
+        except Exception as e:
+            market_lines.append(f"{name} ({ticker}): Error retrieving data")
+    
+    return "\n".join(market_lines)
+
+
 def daily_results(chatgpt_portfolio: pd.DataFrame, cash: float) -> None:
     """Print daily price updates and performance metrics."""
     portfolio_dict: list[dict[str, object]] = chatgpt_portfolio.to_dict(orient="records")
@@ -459,7 +578,7 @@ def daily_results(chatgpt_portfolio: pd.DataFrame, cash: float) -> None:
     for stock in portfolio_dict + [{"ticker": "^RUT"}] + [{"ticker": "IWO"}] + [{"ticker": "XBI"}]:
         ticker = stock["ticker"]
         try:
-            data = yf.download(ticker, period="2d", progress=False)
+            data = yf.download(ticker, period="2d", auto_adjust=True, progress=False)
             data = cast(pd.DataFrame, data)
             if data.empty or len(data) < 2:
                 print(f"Data for {ticker} was empty or incomplete.")
@@ -521,7 +640,7 @@ def daily_results(chatgpt_portfolio: pd.DataFrame, cash: float) -> None:
     print(f"Latest ChatGPT Equity: ${final_equity:.2f}")
     # Get S&P 500 data
     final_date = totals.loc[totals.index[-1], "Date"]
-    spx = yf.download("^SPX", start="2025-06-27", end=final_date + pd.Timedelta(days=1), progress=False)
+    spx = yf.download("^SPX", start="2025-06-27", end=final_date + pd.Timedelta(days=1), auto_adjust=True, progress=False)
     spx = cast(pd.DataFrame, spx)
     spx = spx.reset_index()
 
@@ -535,12 +654,17 @@ def daily_results(chatgpt_portfolio: pd.DataFrame, cash: float) -> None:
     print(chatgpt_portfolio)
     print(f"cash balance: {cash}")
 
-    print(
-        "Here are is your update for today. You can make any changes you see fit (if necessary),\n"
-        "but you may not use deep research. You do have to ask premissons for any changes, as you have full control.\n"
-        "You can however use the Internet and check current prices for potenial buys."
-        "*"
-    )
+    print("\n" + "="*80)
+    print("COMPLETE CHATGPT PROMPT - COPY AND PASTE BELOW:")
+    print("="*80)
+    
+    # Generate and display the complete prompt
+    complete_prompt = generate_chatgpt_prompt(chatgpt_portfolio, cash)
+    print(complete_prompt)
+    
+    print("\n" + "="*80)
+    print("END OF PROMPT")
+    print("="*80)
 
 
 def main(file: str, data_dir: Path | None = None) -> None:
