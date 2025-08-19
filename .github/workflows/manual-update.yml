@@ -53,9 +53,11 @@ jobs:
         
         # Create a daily report file
         report_date = datetime.now().strftime('%Y-%m-%d')
+        generated_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')
+        
         report_content = f'''# Portfolio Report - {report_date}
 
-Generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}
+Generated at: {generated_time}
 
 ## Current Portfolio Status
 
