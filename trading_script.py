@@ -145,9 +145,9 @@ Would you like to log a manual trade? Enter 'b' for buy, 's' for sell, or press 
     for _, stock in portfolio_df.iterrows():
         ticker = stock["ticker"]
         shares = int(stock["shares"])
-        cost = stock["buy_price"]
-        cost_basis = stock["cost_basis"]
-        stop = stock["stop_loss"]
+        cost = float(stock["buy_price"])
+        cost_basis = float(stock["cost_basis"])
+        stop = float(stock["stop_loss"])
         data = yf.Ticker(ticker).history(period="1d")
 
         if data.empty:
@@ -509,9 +509,9 @@ def generate_portfolio_summary(chatgpt_portfolio: pd.DataFrame, cash: float) -> 
     for _, stock in chatgpt_portfolio.iterrows():
         ticker = stock["ticker"]
         shares = int(stock["shares"])
-        buy_price = stock["buy_price"]
-        cost_basis = stock["cost_basis"]
-        stop_loss = stock["stop_loss"]
+        buy_price = float(stock["buy_price"])
+        cost_basis = float(stock["cost_basis"])
+        stop_loss = float(stock["stop_loss"])
         
         # Get current price
         try:
