@@ -58,16 +58,14 @@ jobs:
             
             days = (pd.to_datetime(latest['Date']) - pd.to_datetime(first['Date'])).days
             
-            summary = f'''## Portfolio Performance Summary
-            
-**Period:** {first['Date']} to {latest['Date']} ({days} days)
-**Starting Equity:** \${start_equity:.2f}
-**Ending Equity:** \${end_equity:.2f}
-**Total Return:** {total_return:+.2f}%
-**Latest Cash Balance:** \${latest['Cash Balance']:.2f}
-
-### Recent Holdings
-'''
+            # Build summary using string concatenation to avoid f-string issues in YAML
+            summary = '## Portfolio Performance Summary\n\n'
+            summary += '**Period:** ' + str(first['Date']) + ' to ' + str(latest['Date']) + ' (' + str(days) + ' days)\n'
+            summary += '**Starting Equity:** $' + '{:.2f}'.format(start_equity) + '\n'
+            summary += '**Ending Equity:** $' + '{:.2f}'.format(end_equity) + '\n'
+            summary += '**Total Return:** ' + '{:+.2f}'.format(total_return) + '%\n'
+            summary += '**Latest Cash Balance:** $' + '{:.2f}'.format(latest['Cash Balance']) + '\n\n'
+            summary += '### Recent Holdings\n'
             
             # Get latest non-total positions
             latest_date = pd.to_datetime(latest['Date'])
@@ -79,7 +77,7 @@ jobs:
             
             if not recent_positions.empty:
                 for _, pos in recent_positions.iterrows():
-                    summary += f\"- **{pos['Ticker']}**: {pos['Shares']} shares @ \${pos['Buy Price']:.2f} (Stop: \${pos['Stop Loss']:.2f})\\n\"
+                    summary += '- **' + str(pos['Ticker']) + '**: ' + str(pos['Shares']) + ' shares @ $' + '{:.2f}'.format(pos['Buy Price']) + ' (Stop: $' + '{:.2f}'.format(pos['Stop Loss']) + ')\\n'
             else:
                 summary += 'No active positions\\n'
                 
