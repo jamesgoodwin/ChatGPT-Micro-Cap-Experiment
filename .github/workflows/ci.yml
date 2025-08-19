@@ -1,0 +1,133 @@
+name: Trading Script CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.10, 3.11, 3.12, 3.13]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov flake8
+    
+    - name: Lint with flake8
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Test Python version compatibility
+      run: |
+        python test_python_version.py
+    
+    - name: Test script imports
+      run: |
+        python -c "import trading_script; print('Trading script imports successfully')"
+    
+    - name: Validate CSV files exist
+      run: |
+        test -f "Scripts and CSV Files/chatgpt_portfolio_update.csv" || echo "Portfolio CSV not found"
+        test -f "Scripts and CSV Files/chatgpt_trade_log.csv" || echo "Trade log CSV not found"
+    
+    - name: Test portfolio loading (dry run)
+      run: |
+        python -c "
+        from trading_script import load_latest_portfolio_state
+        import pandas as pd
+        
+        # Create a minimal test CSV if none exists
+        import os
+        test_file = 'test_portfolio.csv'
+        if not os.path.exists('Scripts and CSV Files/chatgpt_portfolio_update.csv'):
+            pd.DataFrame({
+                'Date': ['2025-01-01'], 
+                'Ticker': ['TEST'], 
+                'Shares': [1], 
+                'Buy Price': [10.0], 
+                'Cost Basis': [10.0], 
+                'Stop Loss': [9.0], 
+                'Current Price': [10.0], 
+                'Total Value': [10.0], 
+                'PnL': [0.0], 
+                'Action': ['HOLD'], 
+                'Cash Balance': [90.0], 
+                'Total Equity': [100.0]
+            }).to_csv(test_file, index=False)
+            try:
+                portfolio, cash = load_latest_portfolio_state(test_file)
+                print(f'Portfolio loaded successfully: {len(portfolio) if hasattr(portfolio, \"__len__\") else \"N/A\"} positions, ${cash} cash')
+            finally:
+                os.remove(test_file)
+        else:
+            print('Using existing portfolio CSV for testing')
+        "
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run security scan
+      uses: pypa/gh-action-pip-audit@v1.0.8
+      with:
+        inputs: requirements.txt
+        
+  validate-data:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install pandas
+      run: pip install pandas
+    
+    - name: Validate CSV structure
+      run: |
+        python -c "
+        import pandas as pd
+        import os
+        
+        expected_columns = ['Date', 'Ticker', 'Shares', 'Buy Price', 'Cost Basis', 'Stop Loss', 'Current Price', 'Total Value', 'PnL', 'Action', 'Cash Balance', 'Total Equity']
+        
+        for csv_dir in ['Scripts and CSV Files', 'Start Your Own']:
+            portfolio_file = f'{csv_dir}/chatgpt_portfolio_update.csv'
+            if os.path.exists(portfolio_file):
+                df = pd.read_csv(portfolio_file)
+                missing_cols = set(expected_columns) - set(df.columns)
+                if missing_cols:
+                    print(f'Warning: {portfolio_file} missing columns: {missing_cols}')
+                else:
+                    print(f'✓ {portfolio_file} has all expected columns')
+            else:
+                print(f'Note: {portfolio_file} does not exist')
+        "

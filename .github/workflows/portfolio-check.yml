@@ -1,0 +1,136 @@
+name: Portfolio Health Check
+
+on:
+  schedule:
+    # Run every weekday at 9:30 AM EST (market open)
+    - cron: '30 14 * * 1-5'  # 14:30 UTC = 9:30 EST
+  workflow_dispatch:  # Allow manual triggers
+
+jobs:
+  portfolio-health:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Check portfolio data integrity
+      run: |
+        python -c "
+        import pandas as pd
+        import os
+        from datetime import datetime, timedelta
+        
+        def check_portfolio_health(csv_path):
+            if not os.path.exists(csv_path):
+                print(f'❌ Portfolio file not found: {csv_path}')
+                return False
+                
+            df = pd.read_csv(csv_path)
+            if df.empty:
+                print(f'⚠️  Portfolio is empty: {csv_path}')
+                return True
+                
+            # Check for recent data
+            df['Date'] = pd.to_datetime(df['Date'])
+            latest_date = df['Date'].max()
+            days_old = (datetime.now() - latest_date).days
+            
+            print(f'📊 Portfolio: {csv_path}')
+            print(f'   Latest update: {latest_date.strftime(\"%Y-%m-%d\")} ({days_old} days ago)')
+            
+            if days_old > 7:
+                print(f'⚠️  Data is {days_old} days old')
+            elif days_old > 3:
+                print(f'⚠️  Data is {days_old} days old')
+            else:
+                print(f'✅ Data is recent')
+                
+            # Check for TOTAL row
+            total_rows = df[df['Ticker'] == 'TOTAL']
+            if total_rows.empty:
+                print('❌ No TOTAL summary row found')
+                return False
+            else:
+                latest_total = total_rows.iloc[-1]
+                equity = latest_total['Total Equity']
+                cash = latest_total['Cash Balance']
+                print(f'   Total Equity: \${equity:.2f}')
+                print(f'   Cash Balance: \${cash:.2f}')
+                
+            return True
+        
+        # Check both portfolio files
+        health_status = []
+        health_status.append(check_portfolio_health('Scripts and CSV Files/chatgpt_portfolio_update.csv'))
+        health_status.append(check_portfolio_health('Start Your Own/chatgpt_portfolio_update.csv'))
+        
+        if not all(health_status):
+            exit(1)
+        print('\\n✅ All portfolio health checks passed')
+        "
+    
+    - name: Validate trading script functionality
+      run: |
+        python -c "
+        from trading_script import generate_chatgpt_prompt, generate_portfolio_summary, generate_market_data
+        import pandas as pd
+        
+        # Test with empty portfolio
+        empty_portfolio = pd.DataFrame()
+        cash = 100.0
+        
+        try:
+            summary = generate_portfolio_summary(empty_portfolio, cash)
+            market_data = generate_market_data()
+            prompt = generate_chatgpt_prompt(empty_portfolio, cash)
+            
+            print('✅ Prompt generation functions work correctly')
+            print(f'   Summary length: {len(summary)} characters')
+            print(f'   Market data length: {len(market_data)} characters') 
+            print(f'   Full prompt length: {len(prompt)} characters')
+            
+        except Exception as e:
+            print(f'❌ Error in prompt generation: {e}')
+            exit(1)
+        "
+
+  create-issue-on-failure:
+    runs-on: ubuntu-latest
+    needs: portfolio-health
+    if: failure()
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Create issue on failure
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const title = `Portfolio Health Check Failed - ${new Date().toISOString().split('T')[0]}`;
+          const body = `The automated portfolio health check failed on ${new Date().toISOString()}.
+          
+          Please check:
+          - Portfolio data integrity
+          - Recent updates to CSV files
+          - Trading script functionality
+          
+          See the [failed workflow run](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) for details.`;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['bug', 'automated']
+          });

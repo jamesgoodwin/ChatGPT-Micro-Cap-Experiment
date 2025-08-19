@@ -1,0 +1,132 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags like v1.0.0
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for changelog generation
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Generate portfolio performance summary
+      run: |
+        python -c "
+        import pandas as pd
+        import os
+        from datetime import datetime
+        
+        def generate_performance_summary():
+            portfolio_file = 'Scripts and CSV Files/chatgpt_portfolio_update.csv'
+            if not os.path.exists(portfolio_file):
+                return 'No portfolio data available'
+                
+            df = pd.read_csv(portfolio_file)
+            if df.empty:
+                return 'Portfolio is empty'
+                
+            # Get total rows only
+            totals = df[df['Ticker'] == 'TOTAL'].copy()
+            if totals.empty:
+                return 'No performance data available'
+                
+            totals['Date'] = pd.to_datetime(totals['Date'])
+            totals = totals.sort_values('Date')
+            
+            # Get latest and first entries
+            latest = totals.iloc[-1]
+            first = totals.iloc[0]
+            
+            start_equity = first['Total Equity']
+            end_equity = latest['Total Equity']
+            total_return = ((end_equity - start_equity) / start_equity) * 100
+            
+            days = (pd.to_datetime(latest['Date']) - pd.to_datetime(first['Date'])).days
+            
+            summary = f'''## Portfolio Performance Summary
+            
+**Period:** {first[\"Date\"]} to {latest[\"Date\"]} ({days} days)
+**Starting Equity:** \${start_equity:.2f}
+**Ending Equity:** \${end_equity:.2f}
+**Total Return:** {total_return:+.2f}%
+**Latest Cash Balance:** \${latest[\"Cash Balance\"]:.2f}
+
+### Recent Holdings
+'''
+            
+            # Get latest non-total positions
+            latest_date = pd.to_datetime(latest['Date'])
+            recent_positions = df[
+                (pd.to_datetime(df['Date']) == latest_date) & 
+                (df['Ticker'] != 'TOTAL') & 
+                (~df['Action'].astype(str).str.startswith('SELL'))
+            ]
+            
+            if not recent_positions.empty:
+                for _, pos in recent_positions.iterrows():
+                    summary += f\"- **{pos['Ticker']}**: {pos['Shares']} shares @ \${pos['Buy Price']:.2f} (Stop: \${pos['Stop Loss']:.2f})\\n\"
+            else:
+                summary += 'No active positions\\n'
+                
+            return summary
+        
+        summary = generate_performance_summary()
+        
+        # Write to file for use in release notes
+        with open('performance_summary.md', 'w') as f:
+            f.write(summary)
+        
+        print('Performance summary generated')
+        "
+    
+    - name: Generate changelog
+      run: |
+        # Get commit messages since last tag
+        LAST_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+        if [ -z "$LAST_TAG" ]; then
+          COMMITS=$(git log --pretty=format:"- %s" --no-merges)
+        else
+          COMMITS=$(git log --pretty=format:"- %s" --no-merges ${LAST_TAG}..HEAD)
+        fi
+        
+        echo "## Changes in this release" > changelog.md
+        echo "" >> changelog.md
+        echo "$COMMITS" >> changelog.md
+    
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
+        body_path: |
+          performance_summary.md
+          changelog.md
+        draft: false
+        prerelease: false
+    
+    - name: Upload portfolio data as release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: Scripts and CSV Files/chatgpt_portfolio_update.csv
+        asset_name: portfolio-data-${{ github.ref_name }}.csv
+        asset_content_type: text/csv
