@@ -6,6 +6,10 @@ on:
     - cron: '30 14 * * 1-5'  # 14:30 UTC = 9:30 EST
   workflow_dispatch:  # Allow manual triggers
 
+permissions:
+  contents: write  # Allow workflow to commit and push changes
+  issues: write    # Allow creating issues on failure
+
 jobs:
   portfolio-health:
     runs-on: ubuntu-latest
@@ -104,6 +108,40 @@ jobs:
             print(f'❌ Error in prompt generation: {e}')
             exit(1)
         "
+    
+    - name: Run automated portfolio update
+      run: |
+        # Check if it's a weekday (when markets are open)
+        if [ $(date +%u) -le 5 ]; then
+          echo "📈 Running portfolio update for weekday..."
+          # Run the trading script non-interactively
+          echo "" | python "Scripts and CSV Files/Trading_Script.py" || echo "⚠️ Trading script completed with warnings"
+        else
+          echo "🏖️ Weekend detected, skipping portfolio update"
+        fi
+    
+    - name: Configure git for auto-commits
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Actions Bot"
+    
+    - name: Commit updated portfolio data
+      run: |
+        # Check if there are any changes to commit
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "📝 Changes detected, committing updates..."
+          git add "Scripts and CSV Files/chatgpt_portfolio_update.csv" "Scripts and CSV Files/chatgpt_trade_log.csv" || echo "No CSV changes to add"
+          
+          # Create commit message with current date
+          COMMIT_MSG="Automated portfolio update - $(date '+%Y-%m-%d')"
+          git commit -m "$COMMIT_MSG" || echo "No changes to commit"
+          
+          # Push changes
+          git push || echo "Push failed, possibly no changes"
+          echo "✅ Portfolio data committed and pushed"
+        else
+          echo "ℹ️ No changes detected, nothing to commit"
+        fi
 
   create-issue-on-failure:
     runs-on: ubuntu-latest
