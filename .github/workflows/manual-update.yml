@@ -48,6 +48,11 @@ jobs:
         # Load current portfolio
         portfolio, cash = load_latest_portfolio_state('Scripts and CSV Files/chatgpt_portfolio_update.csv')
         
+        # Convert list to DataFrame if needed
+        if isinstance(portfolio, list):
+            import pandas as pd
+            portfolio = pd.DataFrame(portfolio)
+        
         # Generate summary
         summary = generate_portfolio_summary(portfolio, cash)
         
