@@ -1,0 +1,14 @@
+# Interactive Brokers API Credentials
+# Copy this content to a .env file and fill in your actual credentials
+
+# Your Interactive Brokers username
+IB_USERNAME=your_ib_username
+
+# Your Interactive Brokers password
+IB_PASSWORD=your_ib_password
+
+# Your Interactive Brokers account ID (e.g., U1234567)
+IB_ACCOUNT_ID=your_account_id
+
+# Optional: OpenAI API Key (if you want to use LLM analysis)
+OPENAI_API_KEY=your_openai_api_key
