@@ -66,11 +66,11 @@ jobs:
                 print('❌ No TOTAL summary row found')
                 return False
             else:
-                latest_total = total_rows.iloc[-1]
-                equity = latest_total['Total Equity']
-                cash = latest_total['Cash Balance']
-                print(f'   Total Equity: \${equity:.2f}')
-                print(f'   Cash Balance: \${cash:.2f}')
+                        latest_total = total_rows.iloc[-1]
+        equity = float(latest_total['Total Equity'])
+        cash = float(latest_total['Cash Balance'])
+        print(f'   Total Equity: \${equity:.2f}')
+        print(f'   Cash Balance: \${cash:.2f}')
                 
             return True
         
