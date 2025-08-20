@@ -4,5 +4,5 @@ yfinance==0.2.38
 matplotlib==3.8.4
 requests>=2.32.4
 PyYAML>=6.0
-ibapi>=10.19.2
+ibapi>=9.81.1
 python-dotenv>=1.0.0
