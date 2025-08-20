@@ -213,8 +213,17 @@ jobs:
                 exit(1)
                 
         except Exception as e:
-            print(f'❌ Error calling OpenAI API: {e}')
-            exit(1)
+            print(f'⚠️ Error calling OpenAI API: {e}')
+            print('📝 Continuing without LLM analysis...')
+            # Create empty files to prevent workflow failure
+            with open('llm_response.txt', 'w') as f:
+                f.write('LLM analysis skipped due to API error')
+            with open('api_usage.json', 'w') as f:
+                json.dump({
+                    'timestamp': __import__('datetime').datetime.now().isoformat(),
+                    'error': str(e),
+                    'status': 'skipped'
+                }, f, indent=2)
         "
     
     - name: Run automated portfolio update
