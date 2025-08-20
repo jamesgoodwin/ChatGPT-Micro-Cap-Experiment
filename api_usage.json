@@ -1,0 +1,7 @@
+{
+  "timestamp": "2025-08-20T14:39:32.272669",
+  "prompt_tokens": 790,
+  "completion_tokens": 308,
+  "total_tokens": 1098,
+  "model": "gpt-3.5-turbo"
+}
