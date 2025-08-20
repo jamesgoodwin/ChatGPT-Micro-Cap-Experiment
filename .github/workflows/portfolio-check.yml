@@ -123,6 +123,10 @@ jobs:
         portfolio_file = 'Scripts and CSV Files/chatgpt_portfolio_update.csv'
         try:
             portfolio, cash = load_latest_portfolio_state(portfolio_file)
+            # Convert list to DataFrame if needed
+            if isinstance(portfolio, list):
+                import pandas as pd
+                portfolio = pd.DataFrame(portfolio)
             print(f'📊 Loaded portfolio: {len(portfolio)} positions, \${cash:.2f} cash')
         except Exception as e:
             print(f'⚠️ Could not load portfolio data: {e}')
