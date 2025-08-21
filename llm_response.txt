@@ -1,13 +1,5 @@
-Given the current market conditions and the lack of available data, it is difficult to make informed decisions on the existing positions. However, based on the previous thesis for each stock, here are my recommendations for today:
+Given the current market conditions and the lack of specific price data, I recommend holding onto your current positions for now. Since we do not have real-time information on the stocks in your portfolio, it would be prudent to maintain your positions until we have more updated data to make informed decisions.
 
-1. **ABEO**: Hold the current position of 4 shares with a stop-loss at $6.00. Monitor the stock closely for any updates that may impact its performance.
+I suggest keeping a close eye on the market and individual stock movements to identify any potential opportunities or risks that may arise. Once we have access to more current data, we can reassess and make any necessary adjustments to your portfolio.
 
-2. **ATYR**: Hold the current position of 8 shares with a stop-loss at $4.20. Keep an eye on any developments related to the company that could affect its stock price.
-
-3. **IINN**: Hold the current position of 10 shares with a stop-loss at $1.00. Continue to monitor the stock for any potential catalysts that could drive its price higher.
-
-4. **AXGN**: Hold the current position of 2 shares with a stop-loss at $12.00. Stay informed about any news or events that could influence the stock's performance.
-
-Given the limited cash balance of $15.08, there is not enough available capital to purchase new positions at this time. It would be prudent to focus on monitoring the existing positions and adjusting stop-loss levels if necessary.
-
-**Thesis Review for Next Week**: The portfolio is currently diversified across different micro-cap stocks in the biotech and technology sectors. The strategy seems to be focused on potential growth opportunities within these industries. Moving forward, it will be important to stay updated on company-specific developments and market trends to make informed decisions.
+Please let me know if you would like to proceed with this approach or if you have any specific preferences for potential changes in your portfolio.
