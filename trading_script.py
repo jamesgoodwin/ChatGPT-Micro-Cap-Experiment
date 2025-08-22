@@ -681,7 +681,8 @@ def main(file: str, data_dir: Path | None = None) -> None:
     if data_dir is not None:
         set_data_dir(data_dir)
 
-    chatgpt_portfolio, cash = process_portfolio(chatgpt_portfolio, cash)
+    # Run in non-interactive mode to support automated/scripted execution
+    chatgpt_portfolio, cash = process_portfolio(chatgpt_portfolio, cash, interactive=False)
     daily_results(chatgpt_portfolio, cash)
 
 def load_latest_portfolio_state(
