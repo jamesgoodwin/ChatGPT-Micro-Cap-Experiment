@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import yfinance as yf
-from typing import Any, cast
+from typing import Any, cast, Optional, Tuple
 import os
 import time
 import warnings
@@ -24,6 +24,39 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 DATA_DIR = SCRIPT_DIR  # Save files in the same folder as this script
 PORTFOLIO_CSV = DATA_DIR / "chatgpt_portfolio_update.csv"
 TRADE_LOG_CSV = DATA_DIR / "chatgpt_trade_log.csv"
+
+
+# === Robust market data helpers ===
+
+def fetch_intraday_or_last_close(ticker: str) -> Tuple[Optional[float], Optional[float]]:
+    """Return a tuple of (current_price, day_low) with reliable fallbacks.
+
+    Strategy:
+    1) Try intraday 1m data for today and use the latest close and min low.
+    2) Fallback to last 2 daily candles; use last close and low.
+    Returns (None, None) if no data is available.
+    """
+    try:
+        intraday = yf.download(ticker, period="1d", interval="1m", auto_adjust=True, progress=False)
+        intraday = cast(pd.DataFrame, intraday)
+        if not intraday.empty:
+            current_price = float(intraday["Close"].iloc[-1].item())
+            day_low = float(intraday["Low"].min().item()) if "Low" in intraday.columns else current_price
+            return current_price, day_low
+    except Exception:
+        pass
+
+    try:
+        daily = yf.download(ticker, period="2d", auto_adjust=True, progress=False)
+        daily = cast(pd.DataFrame, daily)
+        if not daily.empty:
+            current_price = float(daily["Close"].iloc[-1].item())
+            day_low = float(daily["Low"].iloc[-1].item()) if "Low" in daily.columns else current_price
+            return current_price, day_low
+    except Exception:
+        pass
+
+    return None, None
 
 
 def set_data_dir(data_dir: Path) -> None:
@@ -148,9 +181,8 @@ Would you like to log a manual trade? Enter 'b' for buy, 's' for sell, or press 
         cost = float(stock["buy_price"])
         cost_basis = float(stock["cost_basis"])
         stop = float(stock["stop_loss"])
-        data = yf.Ticker(ticker).history(period="1d")
-
-        if data.empty:
+        current_price_val, day_low_val = fetch_intraday_or_last_close(ticker)
+        if current_price_val is None or day_low_val is None:
             print(f"No data for {ticker}")
             row = {
                 "Date": today,
@@ -167,8 +199,8 @@ Would you like to log a manual trade? Enter 'b' for buy, 's' for sell, or press 
                 "Total Equity": "",
             }
         else:
-            low_price = round(float(data["Low"].iloc[-1]), 2)
-            close_price = round(float(data["Close"].iloc[-1]), 2)
+            low_price = round(float(day_low_val), 2)
+            close_price = round(float(current_price_val), 2)
 
             if low_price <= stop:
                 price = stop
@@ -515,9 +547,9 @@ def generate_portfolio_summary(chatgpt_portfolio: pd.DataFrame, cash: float) -> 
         
         # Get current price
         try:
-            data = yf.Ticker(ticker).history(period="1d")
-            if not data.empty:
-                current_price = round(float(data["Close"].iloc[-1]), 2)
+            current_price_val, _ = fetch_intraday_or_last_close(ticker)
+            if current_price_val is not None:
+                current_price = round(float(current_price_val), 2)
                 current_value = round(current_price * shares, 2)
                 pnl = round((current_price - buy_price) * shares, 2)
                 pnl_pct = round((current_price - buy_price) / buy_price * 100, 2)
