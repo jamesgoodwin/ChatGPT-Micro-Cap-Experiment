@@ -19,21 +19,21 @@ The last A.I. analyst had this thesis for the current holdings: (insert last the
 === CURRENT PORTFOLIO STATUS (2025-08-22) ===
 
 Current Holdings:
-- ATYR: 5 shares @ $4.90 | Stop: $0.01 (No current price data)
-- BETR: 1 shares @ $13.78 | Stop: $0.01 (No current price data)
-- CCLD: 25 shares @ $2.59 | Stop: $0.01 (No current price data)
-- CSBR: 3 shares @ $6.47 | Stop: $0.01 (No current price data)
+- ATYR: 5 shares @ $4.90 (Current: $5.36) | Value: $26.80 | P&L: $2.30 (+9.4%) | Stop: $0.01
+- BETR: 1 shares @ $13.78 (Current: $17.88) | Value: $17.88 | P&L: $4.10 (+29.8%) | Stop: $0.01
+- CCLD: 25 shares @ $2.59 (Current: $2.82) | Value: $70.50 | P&L: $5.75 (+8.9%) | Stop: $0.01
+- CSBR: 3 shares @ $6.47 (Current: $7.48) | Value: $22.44 | P&L: $3.03 (+15.6%) | Stop: $0.01
 
 Cash Balance: $7.43
-Total Portfolio Value: $7.43
-Total P&L: $0.00
+Total Portfolio Value: $145.05
+Total P&L: $15.18
 
 === MARKET DATA ===
 
-Russell 2000 (Small Caps) (^RUT): Data unavailable
-iShares Russell 2000 Growth ETF (IWO): Data unavailable
-SPDR S&P Biotech ETF (XBI): Data unavailable
-S&P 500 (^SPX): Data unavailable
+Russell 2000 (Small Caps) (^RUT): $2361.95 (+3.86%) | Volume: 0
+iShares Russell 2000 Growth ETF (IWO): $307.28 (+3.42%) | Volume: 504,043
+SPDR S&P Biotech ETF (XBI): $90.92 (+1.11%) | Volume: 9,874,816
+S&P 500 (^SPX): $6466.91 (+1.52%) | Volume: 3,048,128,478
 
 === YOUR TASK ===
 

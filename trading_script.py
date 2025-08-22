@@ -59,6 +59,46 @@ def fetch_intraday_or_last_close(ticker: str) -> Tuple[Optional[float], Optional
     return None, None
 
 
+# New helper: pull latest known price from CSV if live data is unavailable
+
+def get_latest_known_price_from_csv(ticker: str) -> Optional[float]:
+    """Return the most recent known price for a ticker from the portfolio CSV.
+
+    Priority order per row (latest to oldest):
+    1) Current Price (if present and numeric)
+    2) Buy Price
+    3) Cost Basis
+    """
+    try:
+        if not PORTFOLIO_CSV.exists():
+            return None
+        df = pd.read_csv(PORTFOLIO_CSV)
+        if df.empty or "Ticker" not in df.columns:
+            return None
+        df_ticker = df[df["Ticker"].astype(str).str.upper() == ticker.upper()].copy()
+        if df_ticker.empty:
+            return None
+        if "Date" in df_ticker.columns:
+            df_ticker["Date"] = pd.to_datetime(df_ticker["Date"], errors="coerce")
+            df_ticker = df_ticker.sort_values("Date")
+        # Iterate from latest to oldest
+        for _, row in df_ticker[::-1].iterrows():
+            for col in ("Current Price", "Buy Price", "Cost Basis"):
+                if col in df_ticker.columns:
+                    val = row.get(col, "")
+                    try:
+                        if val == "" or pd.isna(val):
+                            continue
+                        price = float(val)
+                        if price > 0:
+                            return price
+                    except Exception:
+                        continue
+        return None
+    except Exception:
+        return None
+
+
 def set_data_dir(data_dir: Path) -> None:
     """Update global paths for portfolio and trade logs.
 
@@ -559,9 +599,31 @@ def generate_portfolio_summary(chatgpt_portfolio: pd.DataFrame, cash: float) -> 
                 
                 summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} (Current: ${current_price:.2f}) | Value: ${current_value:.2f} | P&L: ${pnl:.2f} ({pnl_pct:+.1f}%) | Stop: ${stop_loss:.2f}")
             else:
-                summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} | Stop: ${stop_loss:.2f} (No current price data)")
+                # Fallback to latest known price from CSV
+                fallback_price = get_latest_known_price_from_csv(ticker)
+                if fallback_price is not None:
+                    current_price = round(float(fallback_price), 2)
+                    current_value = round(current_price * shares, 2)
+                    pnl = round((current_price - buy_price) * shares, 2)
+                    pnl_pct = round((current_price - buy_price) / buy_price * 100, 2)
+                    total_value += current_value
+                    total_pnl += pnl
+                    summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} (Last known: ${current_price:.2f}) | Value: ${current_value:.2f} | P&L: ${pnl:.2f} ({pnl_pct:+.1f}%) | Stop: ${stop_loss:.2f}")
+                else:
+                    summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} | Stop: ${stop_loss:.2f} (No current price data)")
         except Exception:
-            summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} | Stop: ${stop_loss:.2f} (Price data unavailable)")
+            # If live fetch raises, still attempt CSV fallback
+            fallback_price = get_latest_known_price_from_csv(ticker)
+            if fallback_price is not None:
+                current_price = round(float(fallback_price), 2)
+                current_value = round(current_price * shares, 2)
+                pnl = round((current_price - buy_price) * shares, 2)
+                pnl_pct = round((current_price - buy_price) / buy_price * 100, 2)
+                total_value += current_value
+                total_pnl += pnl
+                summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} (Last known: ${current_price:.2f}) | Value: ${current_value:.2f} | P&L: ${pnl:.2f} ({pnl_pct:+.1f}%) | Stop: ${stop_loss:.2f}")
+            else:
+                summary_lines.append(f"- {ticker}: {shares} shares @ ${buy_price:.2f} | Stop: ${stop_loss:.2f} (Price data unavailable)")
     
     summary_lines.append(f"\nCash Balance: ${cash:.2f}")
     summary_lines.append(f"Total Portfolio Value: ${total_value + cash:.2f}")
@@ -693,6 +755,14 @@ def daily_results(chatgpt_portfolio: pd.DataFrame, cash: float) -> None:
     # Generate and display the complete prompt
     complete_prompt = generate_chatgpt_prompt(chatgpt_portfolio, cash)
     print(complete_prompt)
+    
+    # Also write to a file for convenience
+    try:
+        out_path = SCRIPT_DIR / "generated_prompt.txt"
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(complete_prompt)
+    except Exception:
+        pass
     
     print("\n" + "="*80)
     print("END OF PROMPT")
