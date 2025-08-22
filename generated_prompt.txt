@@ -16,16 +16,16 @@ The last A.I. analyst had this thesis for the current holdings: (insert last the
 
 **Note: By no means am I a "prompt engineer." I came up with these off the top of my head. If you have prompts you would like to use, email me and I will be sure to credit you!**
 
-=== CURRENT PORTFOLIO STATUS (2025-08-21) ===
+=== CURRENT PORTFOLIO STATUS (2025-08-22) ===
 
 Current Holdings:
-- ABEO: 4 shares @ $5.77 | Stop: $6.00 (No current price data)
-- ATYR: 8 shares @ $5.09 | Stop: $4.20 (No current price data)
-- IINN: 10 shares @ $1.25 | Stop: $1.00 (No current price data)
-- AXGN: 2 shares @ $14.96 | Stop: $12.00 (No current price data)
+- ATYR: 5 shares @ $4.90 | Stop: $0.01 (No current price data)
+- BETR: 1 shares @ $13.78 | Stop: $0.01 (No current price data)
+- CCLD: 25 shares @ $2.59 | Stop: $0.01 (No current price data)
+- CSBR: 3 shares @ $6.47 | Stop: $0.01 (No current price data)
 
-Cash Balance: $15.08
-Total Portfolio Value: $15.08
+Cash Balance: $7.43
+Total Portfolio Value: $7.43
 Total P&L: $0.00
 
 === MARKET DATA ===
