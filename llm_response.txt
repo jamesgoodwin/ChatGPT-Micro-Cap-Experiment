@@ -1,5 +1,14 @@
-I recommend holding onto your current positions as there is no current price data available. 
+Given the current market conditions and the lack of specific price data for your holdings, I recommend the following actions:
 
-Since there is no data on the market and individual stocks, it would be prudent to wait for updated information before making any changes to your portfolio. 
+1. Hold current positions: 
+   - ATYR: 5 shares @ $4.90
+   - BETR: 1 share @ $13.78
+   - CCLD: 25 shares @ $2.59
+   - CSBR: 3 shares @ $6.47
 
-Please stay tuned for further updates on market conditions to make informed decisions.
+2. Adjust stop-loss levels: 
+   - Since we currently do not have price data for the stocks, I recommend keeping the stop-loss levels at $0.01 for now. Once we have updated price information, we can adjust the stop-loss levels accordingly.
+
+3. Monitor the market closely for any new opportunities that may arise. Keep an eye on the overall market conditions and any specific news or developments related to micro-cap stocks.
+
+Please ensure to stay updated on the market data and be ready to make informed decisions based on the latest information available. Feel free to reach out for further guidance or updates.
