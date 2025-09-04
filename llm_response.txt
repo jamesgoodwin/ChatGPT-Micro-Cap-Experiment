@@ -1,19 +1,5 @@
-I am a professional-grade portfolio analyst. 
+Given the current market conditions and the lack of available data, I recommend holding onto your current positions and maintaining the existing stop-loss levels. Since we do not have real-time market data for your current holdings, it is best to wait for more information before making any changes to the portfolio.
 
-Given the current market conditions and the status of your portfolio, here are my recommendations for today:
+As soon as we have access to updated market data, we can reevaluate the positions and make more informed decisions. In the meantime, it's prudent to stay invested in your current holdings and monitor any developments closely.
 
-1. **Hold current positions:** 
-    - ATYR: Hold the 5 shares at $4.90 with a stop-loss at $0.01.
-    - BETR: Hold the 1 share at $13.78 with a stop-loss at $0.01.
-    - CCLD: Hold the 25 shares at $2.59 with a stop-loss at $0.01.
-    - CSBR: Hold the 3 shares at $6.47 with a stop-loss at $0.01.
-
-2. **Buy new positions:** 
-    - With a cash balance of $7.43, I recommend looking for potential new micro-cap stocks to invest in. Conduct thorough research and identify a promising opportunity that aligns with your investment goals.
-
-3. **Adjust stop-loss levels:** 
-    - Since there is no current price data available, I recommend maintaining the existing stop-loss levels for now. Keep an eye on the market and be prepared to adjust the stop-loss levels accordingly when price data becomes available.
-
-Please ensure that any new investments align with your overall investment strategy and risk tolerance. Keep a close watch on market developments and be prepared to make adjustments as needed. 
-
-Feel free to reach out if you need further assistance or have any questions. Good luck with your portfolio management!
+Please let me know if you have any specific stocks in mind that you would like to research further or if you would like to adjust your investment strategy in any way.
