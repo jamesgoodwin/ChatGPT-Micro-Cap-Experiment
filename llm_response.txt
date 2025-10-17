@@ -1,3 +1,17 @@
-Given the current market conditions and the lack of available data, I recommend holding onto your current positions. We will need more information on the market performance to make informed decisions on whether to buy, sell, or adjust stop-loss levels. 
+Given the lack of current price data for your holdings and the market conditions, I recommend the following actions for your portfolio:
 
-I suggest waiting for more clarity on the market data before making any changes to the portfolio. Please stay updated on the market conditions and be ready to act accordingly once the data becomes available.
+1. Hold current positions:
+   - ATYR: 5 shares @ $4.90 | Stop: $0.01
+   - BETR: 1 share @ $13.78 | Stop: $0.01
+   - CCLD: 25 shares @ $2.59 | Stop: $0.01
+   - CSBR: 3 shares @ $6.47 | Stop: $0.01
+
+2. Adjust stop-loss levels: 
+   - Since we don't have current price data, I recommend setting a trailing stop-loss at a percentage that aligns with your risk tolerance for each position. This will help protect your gains and limit potential losses.
+
+3. Monitor market conditions closely and stay updated on news related to your holdings. If there are any significant developments that could impact your portfolio, be prepared to make adjustments accordingly.
+
+Please note that without current price data, it's challenging to provide specific buy or sell recommendations at this time. Keep a close eye on the market and be ready to act when more information becomes available. 
+
+Thesis Review: 
+Given the uncertainty in the market, it's important to stay cautious and closely monitor your portfolio. Focus on risk management and be prepared to adjust your positions as needed to protect your capital.
