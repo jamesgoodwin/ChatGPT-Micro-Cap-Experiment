@@ -1,7 +1,18 @@
-Given the current market conditions and the lack of available data for your current holdings, I recommend the following actions for your portfolio:
+I am a professional-grade portfolio analyst. 
 
-1. Hold all current positions until we have more market data available to make informed decisions.
-2. Consider conducting deep research on potential new micro-cap stocks to invest in once more information is available.
-3. Keep a close eye on any news or developments in the micro-cap space that could impact your current holdings.
+Given the current market conditions and the lack of price data for the stocks in your portfolio, I recommend the following actions:
 
-Since we have limited information at the moment, it's best to maintain a cautious approach and wait for more insights before making any significant changes to your portfolio. Feel free to reach out for further updates or guidance as more data becomes available.
+1. Hold current positions:
+   - ATYR: 5 shares @ $4.90 | Stop: $0.01
+   - BETR: 1 share @ $13.78 | Stop: $0.01
+   - CCLD: 25 shares @ $2.59 | Stop: $0.01
+   - CSBR: 3 shares @ $6.47 | Stop: $0.01
+
+2. Adjust stop-loss levels:
+   - Since there is no current price data available, I recommend keeping the stop-loss levels as they are until we have more information.
+
+3. Hold onto the cash balance of $7.43 for future opportunities.
+
+Please note that without updated price data, it's challenging to make informed decisions about buying or selling stocks. I recommend monitoring the market closely for any updates and be prepared to act swiftly when the data becomes available.
+
+Thesis review: The current portfolio is diversified across different micro-cap stocks, which can help mitigate risk. Moving forward, it will be essential to monitor the market closely and be ready to make adjustments based on new information.
