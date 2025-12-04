@@ -1,18 +1,14 @@
-I am a professional-grade portfolio analyst. 
+Given the lack of current price data for your holdings and the market conditions, I recommend the following actions for your portfolio:
 
-Given the current market conditions and the lack of price data for the stocks in your portfolio, I recommend the following actions:
-
-1. Hold current positions:
-   - ATYR: 5 shares @ $4.90 | Stop: $0.01
-   - BETR: 1 share @ $13.78 | Stop: $0.01
-   - CCLD: 25 shares @ $2.59 | Stop: $0.01
-   - CSBR: 3 shares @ $6.47 | Stop: $0.01
+1. Hold current positions: 
+   - ATYR: 5 shares @ $4.90
+   - BETR: 1 share @ $13.78
+   - CCLD: 25 shares @ $2.59
+   - CSBR: 3 shares @ $6.47
 
 2. Adjust stop-loss levels:
-   - Since there is no current price data available, I recommend keeping the stop-loss levels as they are until we have more information.
+   - Since there is no current price data available, I recommend keeping the stop-loss levels at $0.01 for each position until we have updated market information.
 
-3. Hold onto the cash balance of $7.43 for future opportunities.
+3. Monitor the market closely and be prepared to make adjustments once price data becomes available.
 
-Please note that without updated price data, it's challenging to make informed decisions about buying or selling stocks. I recommend monitoring the market closely for any updates and be prepared to act swiftly when the data becomes available.
-
-Thesis review: The current portfolio is diversified across different micro-cap stocks, which can help mitigate risk. Moving forward, it will be essential to monitor the market closely and be ready to make adjustments based on new information.
+Please note that with a cash balance of $7.43, you have limited flexibility for new positions at the moment. It would be best to wait for more information before making any significant changes to your portfolio.
