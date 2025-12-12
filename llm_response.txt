@@ -1,13 +1,18 @@
-I recommend the following actions for your portfolio:
+Given the lack of current price data for your holdings and market indices, it is challenging to make informed decisions. However, based on the last available information, here are my recommendations:
 
-1. Hold current positions as there is no current price data available to assess their performance.
+1. **Hold current positions**: 
+   - ATYR: 5 shares @ $4.90 | Stop: $0.01
+   - BETR: 1 share @ $13.78 | Stop: $0.01
+   - CCLD: 25 shares @ $2.59 | Stop: $0.01
+   - CSBR: 3 shares @ $6.47 | Stop: $0.01
 
-2. With a cash balance of $7.43, consider buying new positions to diversify your portfolio further. 
+2. **Adjust Stop-Loss Levels**:
+   - Given the volatile nature of micro-cap stocks, consider tightening your stop-loss levels to protect your gains and limit potential losses.
 
-3. Look for potential micro-cap stocks with strong growth prospects and catalysts that could drive positive returns within your specified timeframe.
+3. **Review New Positions**:
+   - With a cash balance of $7.43, consider researching and identifying new potential micro-cap stocks that align with your investment strategy. Ensure that your selections have a strong thesis and potential for alpha generation.
 
-4. If any of your current holdings reach your stop-loss levels or if there are negative developments in the company, consider selling those positions to minimize losses.
+4. **Market Monitoring**:
+   - Keep a close eye on market conditions and any news or developments that may impact your current holdings or potential new positions.
 
-5. Keep a close eye on market conditions and news related to micro-cap stocks to make informed decisions for your portfolio.
-
-Please ensure to conduct thorough research before making any trades and consider the risk factors associated with micro-cap stocks. Good luck with your portfolio management!
+Please conduct thorough research and analysis before making any decisions. Remember to update your stop-loss levels and consider diversifying your portfolio to manage risk effectively. Let me know if you need further assistance or have any specific questions.
