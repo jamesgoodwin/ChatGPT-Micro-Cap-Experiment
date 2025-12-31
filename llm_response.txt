@@ -1,18 +1,15 @@
 Given the current portfolio status and market conditions, here are my recommendations for today:
 
-1. **Hold current positions:**
-   - ATYR: Hold 5 shares @ $4.90 with a stop at $0.01.
-   - BETR: Hold 1 share @ $13.78 with a stop at $0.01.
-   - CCLD: Hold 25 shares @ $2.59 with a stop at $0.01.
-   - CSBR: Hold 3 shares @ $6.47 with a stop at $0.01.
+1. Hold current positions:
+- ATYR: 5 shares @ $4.90 | Stop: $0.01
+- BETR: 1 share @ $13.78 | Stop: $0.01
+- CCLD: 25 shares @ $2.59 | Stop: $0.01
+- CSBR: 3 shares @ $6.47 | Stop: $0.01
 
-2. **Adjust stop-loss levels:**
-   - Since there is no current price data available, I recommend adjusting the stop-loss levels once the data is accessible. Consider updating the stops based on the latest market conditions to protect gains and manage risk.
+2. Buy new positions:
+- Since you have $7.43 in cash, I recommend buying shares of a new micro-cap stock to diversify your portfolio. Consider looking for potential opportunities in the healthcare or technology sector, as these areas have shown promise for growth in the past.
 
-3. **Use available cash to buy new positions:**
-   - With a cash balance of $7.43, consider researching and identifying potential micro-cap stocks with growth potential to invest in. Once you have identified a promising opportunity, provide specific trade instructions including the stock symbol, number of shares to purchase, limit pricing, and any stop-loss levels.
+3. Adjust stop-loss levels:
+- Given the volatile nature of micro-cap stocks, it's essential to regularly review and adjust stop-loss levels to protect your portfolio. Consider tightening the stop-loss levels for your existing positions if you believe the market conditions are becoming more unpredictable.
 
-4. **Monitor market data:**
-   - Keep an eye on the market conditions and any updates on the Russell 2000, iShares Russell 2000 Growth ETF, SPDR S&P Biotech ETF, and S&P 500 indices to make informed decisions regarding your portfolio.
-
-Remember to conduct thorough research and analysis before making any trading decisions. If you have any specific stocks in mind for new positions, please provide the details for further evaluation.
+Please let me know if you would like more specific recommendations or if you have any particular criteria in mind for buying new positions.
