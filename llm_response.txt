@@ -1,15 +1,10 @@
-I recommend the following actions for your portfolio:
+Given the limited information available, here are my recommendations for your current portfolio:
 
-1. **Hold current positions:**
-   - ATYR: 5 shares @ $4.90 | Stop: $0.01
-   - BETR: 1 share @ $13.78 | Stop: $0.01
-   - CCLD: 25 shares @ $2.59 | Stop: $0.01
-   - CSBR: 3 shares @ $6.47 | Stop: $0.01
+1. ATYR: Hold
+2. BETR: Hold
+3. CCLD: Hold
+4. CSBR: Hold
 
-2. **Buy new position:**
-   - Look for a potential micro-cap stock with strong growth potential within your available cash balance of $7.43. Perform deep research to identify a promising investment opportunity and provide specific trade instructions for the purchase.
+With the market data being unavailable, it is challenging to make informed decisions on buying or selling new positions. I recommend holding onto your current positions for now until we have more market data to analyze. Keep a close eye on any news or developments related to the companies in your portfolio that could impact their stock prices.
 
-3. **Adjust stop-loss levels:**
-   - Consider revisiting the stop-loss levels for your current holdings based on any new information or developments that may impact the stock prices. Make necessary adjustments to protect your positions.
-
-Please conduct thorough research before making any decisions and ensure that your choices align with your goal of maximizing returns within the specified timeframe. Let me know if you need any further assistance.
+If you have any specific preferences or criteria for new buys, please provide them so that I can tailor my recommendations accordingly. Let me know if you would like me to review your portfolio again once market data becomes available.
