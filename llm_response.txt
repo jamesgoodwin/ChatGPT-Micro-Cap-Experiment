@@ -1,11 +1,17 @@
-Given the lack of current price data for the market and individual stocks, it's challenging to provide precise recommendations. However, based on the information provided on your current holdings, here are some general suggestions:
+Given the lack of current price data for your holdings and the market conditions, I recommend the following actions for your portfolio:
 
-1. **Hold Current Positions:** Since there is no current price data available, it may be best to hold onto your current positions until more information is available. Keep an eye out for any updates on the stocks.
+1. Hold current positions:
+   - ATYR: 5 shares @ $4.90 | Stop: $0.01
+   - BETR: 1 share @ $13.78 | Stop: $0.01
+   - CCLD: 25 shares @ $2.59 | Stop: $0.01
+   - CSBR: 3 shares @ $6.47 | Stop: $0.01
 
-2. **Monitor Stop-Loss Levels:** Even without current price data, it's essential to ensure that your stop-loss levels are still appropriate for each position. If there have been significant changes in the market or specific stocks, adjust your stop-loss accordingly.
+2. Adjust stop-loss levels:
+   - Since there is no current price data available, I suggest keeping the stop-loss levels as they are until we have updated information.
 
-3. **Research New Opportunities:** With a cash balance of $7.43, you may want to start researching potential new micro-cap opportunities that align with your investment objectives. Look for stocks with strong growth potential or upcoming catalysts.
+3. Hold cash balance:
+   - With a cash balance of $7.43, it might be beneficial to hold onto it for potential future opportunities in the micro-cap market.
 
-4. **Stay Informed:** Keep an eye out for any market updates or news that could impact your current holdings or potential new positions. Stay informed to make well-informed decisions.
+Please note that without current price data, it is challenging to make informed decisions on buying or selling positions. I recommend monitoring the market closely for updates and adjusting your positions accordingly when more information becomes available.
 
-Without current price data, it's crucial to proceed with caution and stay vigilant. Feel free to reach out for further guidance once more information becomes available.
+Thesis Summary: The portfolio is currently holding positions in micro-cap stocks with a focus on generating alpha. The strategy revolves around deep research and strategic decision-making to maximize returns within the specified timeframe.
