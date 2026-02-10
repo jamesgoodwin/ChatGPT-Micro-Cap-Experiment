@@ -1,15 +1,9 @@
-Given the lack of current price data for your holdings and the market conditions, I recommend the following actions for your portfolio:
+Given the lack of current price data for your existing holdings and the overall market, I recommend taking a cautious approach today. 
 
-1. Hold current positions:
-   - ATYR: 5 shares @ $4.90 | Stop: $0.01
-   - BETR: 1 share @ $13.78 | Stop: $0.01
-   - CCLD: 25 shares @ $2.59 | Stop: $0.01
-   - CSBR: 3 shares @ $6.47 | Stop: $0.01
+Since your cash balance is low at $7.43, I recommend holding onto your current positions until we have more market data. 
 
-2. Adjust stop-loss levels:
-   - Since we don't have current price data, I suggest keeping the stop-loss levels as is for now. Once we have updated pricing information, we can reassess and potentially adjust the stop-loss levels accordingly.
+I suggest conducting a thorough analysis of potential new micro-cap stocks to invest in once we have more information. 
 
-3. Hold cash balance:
-   - With a cash balance of $7.43, it might be beneficial to keep some liquidity for potential future opportunities in the micro-cap market.
+Please continue to monitor the market closely and be prepared to act accordingly as more data becomes available. 
 
-Please note that without current price data, it's challenging to make precise recommendations. Once we have access to updated market information, we can revisit the portfolio and make more informed decisions.
+Thesis review: Continue to monitor current positions while researching new potential micro-cap stocks for future investment opportunities.
