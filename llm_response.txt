@@ -1,9 +1,5 @@
-I recommend the following actions for your current portfolio:
+Given the current market conditions and the lack of available data for the stocks in your portfolio, I recommend holding onto your current positions for now.
 
-1. Hold all current positions as there is no current price data available to make informed decisions on whether to sell or adjust stop-loss levels.
+However, with a cash balance of $7.43, I suggest looking for potential new micro-cap stocks to invest in. Conduct thorough research on promising companies with growth potential within the micro-cap space and consider diversifying your portfolio further.
 
-2. With the available cash balance of $7.43, I suggest looking for new micro-cap stocks to buy. Conduct deep research on potential candidates and provide specific trade instructions for purchasing new positions.
-
-3. Keep monitoring the market conditions for any updates on the stocks in your portfolio. Make sure to adjust stop-loss levels accordingly once price data becomes available.
-
-Please proceed with the above recommendations and provide specific trade instructions for any new purchases. Good luck with your portfolio!
+Please provide specific details on any new purchases you would like to make, including the stock symbol, number of shares, purchase price, and any applicable stop-loss levels. Keep in mind your objective of generating maximum return by the end of the specified timeframe.
