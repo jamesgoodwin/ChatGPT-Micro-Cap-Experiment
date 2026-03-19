@@ -1,7 +1,18 @@
-Given the lack of current price data for the holdings in your portfolio, it's challenging to make informed decisions about whether to hold, buy, sell, or adjust stop-loss levels. 
+Given the current market conditions and the lack of available data, it is difficult to make informed decisions on your portfolio. However, based on the information provided, here are my recommendations:
 
-However, with the available cash of $7.43, you may consider looking for potential new micro-cap opportunities. Conduct thorough research on potential candidates that align with your investment strategy and risk tolerance.
+1. Hold current positions:
+   - ATYR: Hold with the existing stop-loss at $0.01.
+   - BETR: Hold with the existing stop-loss at $0.01.
+   - CCLD: Hold with the existing stop-loss at $0.01.
+   - CSBR: Hold with the existing stop-loss at $0.01.
 
-If you find a promising micro-cap stock, provide specific trade instructions such as the order type, date, limit pricing, and any necessary stop-loss levels. Remember to focus on generating alpha in your portfolio.
+2. Buy new positions:
+   - Without specific price data, it is challenging to recommend new positions. I suggest waiting for updated market information before making any new purchases.
 
-Please ensure to keep a close eye on market conditions and news that may impact your portfolio holdings. Good luck with your research and decision-making process.
+3. Adjust stop-loss levels:
+   - Since we lack current price data, there are no adjustments needed at this time.
+
+Given the uncertainty in the market data, it is advisable to maintain your current positions and wait for more information before making any significant changes to your portfolio. Please stay tuned for updated market data to make more informed decisions in the future.
+
+**Thesis Review:**
+The current portfolio consists of micro-cap stocks with a focus on potential growth. The strategy is to hold these positions with appropriate stop-loss levels to manage risk while aiming for alpha in the long run. The lack of current market data makes it challenging to make precise decisions, but the portfolio is positioned for potential gains once more information is available.
