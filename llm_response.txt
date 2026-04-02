@@ -1,10 +1,1 @@
-Given the current market conditions and the lack of available data, I recommend holding onto your current positions for now. It's important to wait for more information before making any new decisions. 
-
-However, I suggest updating your stop-loss levels for risk management purposes. Here are the revised stop-loss levels for your current holdings:
-
-- ATYR: Adjust stop-loss to $4.50
-- BETR: Adjust stop-loss to $13.00
-- CCLD: Adjust stop-loss to $2.40
-- CSBR: Adjust stop-loss to $6.20
-
-This will help protect your portfolio in case of any unexpected market movements. Keep monitoring the market closely for any updates and adjust your strategy accordingly.
+I recommend holding the current positions as there is no current price data available for the stocks in your portfolio. It's best to wait for updated information before making any decisions.
