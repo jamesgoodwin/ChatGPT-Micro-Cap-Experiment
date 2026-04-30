@@ -1,16 +1,11 @@
-I recommend the following actions for your portfolio:
+Given the current market data being unavailable, it's challenging to assess the performance of your portfolio against the market indices. However, let's dive into your current holdings and see if there are any adjustments to be made:
 
-1. **Hold current positions:**
-   - ATYR: 5 shares @ $4.90 | Stop: $0.01
-   - BETR: 1 share @ $13.78 | Stop: $0.01
-   - CCLD: 25 shares @ $2.59 | Stop: $0.01
-   - CSBR: 3 shares @ $6.47 | Stop: $0.01
+1. ATYR: With no current price data available, it's difficult to make an informed decision. I recommend holding onto your 5 shares for now.
 
-2. **Buy new positions:**
-   - Since you have $7.43 in cash, I recommend using it to purchase additional shares in a new micro-cap stock. Consider researching potential candidates that align with your investment strategy and risk tolerance.
+2. BETR: Similarly, without current price data, it's hard to make a call. I suggest holding onto your single share of BETR.
 
-3. **Adjust stop-loss levels:**
-   - It might be a good idea to review and potentially adjust the stop-loss levels for your existing positions based on any new developments or changes in market conditions.
+3. CCLD: As there is no current price data, I recommend holding onto your 25 shares of CCLD.
 
-4. **Portfolio Summary:**
-   - Your portfolio is currently well-diversified across different micro-cap stocks. It's important to continue monitoring market conditions and company-specific news to make informed decisions. Remember to stick to your investment thesis and risk management strategies. Good luck with your portfolio!
+4. CSBR: Without current price data, I advise holding onto your 3 shares of CSBR.
+
+Given the limited information available, I recommend maintaining your current positions until we have access to updated market data. If you have any specific stocks in mind that you would like to consider, please provide them for further analysis.
