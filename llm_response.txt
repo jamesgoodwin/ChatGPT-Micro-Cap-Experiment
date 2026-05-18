@@ -1,9 +1,18 @@
 I recommend the following actions for your portfolio:
 
-1. Hold current positions as there is no current price data available to make informed decisions on selling or adjusting stop-loss levels.
+1. Hold current positions:
+   - ATYR: 5 shares @ $4.90 | Stop: $0.01
+   - BETR: 1 share @ $13.78 | Stop: $0.01
+   - CCLD: 25 shares @ $2.59 | Stop: $0.01
+   - CSBR: 3 shares @ $6.47 | Stop: $0.01
 
-2. With a cash balance of $7.43, I recommend looking for potential new positions to invest in. Conduct research on micro-cap stocks with strong growth potential and consider diversifying your portfolio to maximize returns.
+2. Buy new positions:
+   - Look for potential micro-cap stocks with strong growth prospects and catalysts that could drive price appreciation in the coming months. Allocate a portion of your available cash balance to build a diversified portfolio.
 
-3. Keep a close eye on market conditions and stay updated on price data for your current holdings to make informed decisions in the future.
+3. Adjust stop-loss levels:
+   - Consider raising the stop-loss levels for your existing positions based on any recent developments or changes in market conditions to protect your gains and manage risk effectively.
 
-Remember to conduct thorough research before making any investment decisions and consider the potential risks associated with micro-cap stocks. Good luck with your portfolio!
+Please conduct thorough research on potential new investments before making any buying decisions. Keep an eye on market trends and news that could impact the micro-cap sector. 
+
+Thesis Review: 
+The current portfolio consists of a mix of micro-cap stocks with growth potential. It is essential to continue monitoring each position closely and stay informed about any market developments to make informed decisions for maximizing returns.
