@@ -1,15 +1,17 @@
-I recommend the following actions for your portfolio:
+Given the lack of current price data for your holdings and the market conditions, I recommend the following actions for your portfolio:
 
-1. **Hold Current Positions:**
-   - ATYR: Hold 5 shares @ $4.90 with a stop at $0.01
-   - BETR: Hold 1 share @ $13.78 with a stop at $0.01
-   - CCLD: Hold 25 shares @ $2.59 with a stop at $0.01
-   - CSBR: Hold 3 shares @ $6.47 with a stop at $0.01
+1. Hold current positions:
+   - ATYR: 5 shares @ $4.90 | Stop: $0.01
+   - BETR: 1 share @ $13.78 | Stop: $0.01
+   - CCLD: 25 shares @ $2.59 | Stop: $0.01
+   - CSBR: 3 shares @ $6.47 | Stop: $0.01
 
-2. **Buy New Positions:**
-   - Look for potential micro-cap stocks with strong growth potential and consider diversifying your portfolio with new positions.
+2. Buy new positions:
+   - With your available cash of $7.43, I recommend looking for potential micro-cap stocks that show strong growth potential or have upcoming catalysts. Conduct thorough research to identify promising opportunities and consider diversifying your portfolio.
 
-3. **Adjust Stop-Loss Levels:**
-   - Since there is no current price data available, it may be wise to reevaluate and potentially adjust stop-loss levels once market data is accessible.
+3. Adjust stop-loss levels:
+   - Since there is no current price data available, it may be challenging to adjust stop-loss levels accurately. I recommend revisiting the stop-loss levels once the market data becomes available to ensure proper risk management.
 
-Please keep a close eye on market conditions and be ready to make adjustments accordingly. Remember, the goal is to generate maximum returns within the given timeframe. Good luck with your portfolio management!
+Remember to conduct in-depth research and consider the potential upside and downside risks of any new positions before making any trades. Keep a close eye on market developments and be prepared to adjust your portfolio accordingly. 
+
+Thesis review for next week: Continue to focus on identifying undervalued micro-cap stocks with growth potential and catalysts for outperformance. Stay disciplined in risk management and monitor market conditions closely for opportunities.
