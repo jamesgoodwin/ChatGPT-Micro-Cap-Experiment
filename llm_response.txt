@@ -1,11 +1,20 @@
-I recommend reviewing your current positions:
+I recommend reviewing your current positions and considering potential adjustments. Given the lack of current price data for your holdings, it's essential to stay proactive in managing your portfolio.
 
-1. **ATYR:** Since there is no current price data available, I suggest holding onto your 5 shares with a stop-loss at $0.01 until we have more information.
+Here are some specific recommendations based on your current holdings and available cash:
 
-2. **BETR:** Similar to ATYR, it's hard to make a decision without current price data. Hold onto your 1 share with a stop-loss at $0.01.
+1. **ATYR (ATYR Therapeutics, Inc.):**
+   - Since there is no current price data available, I suggest holding your 5 shares of ATYR for now. However, once price data is accessible, consider setting a trailing stop-loss to protect your gains.
 
-3. **CCLD:** With 25 shares at $2.59, I recommend holding this position for now. Keep your stop-loss at $0.01 until we have more market data.
+2. **BETR (Better Choice Company Inc.):**
+   - With 1 share of BETR and no current price data, I recommend holding this position until further information is available.
 
-4. **CSBR:** Hold onto your 3 shares at $6.47 with a stop-loss at $0.01 until we have more information on the stock price.
+3. **CCLD (CoreCivic, Inc.):**
+   - Maintain your 25 shares of CCLD, but be prepared to adjust your stop-loss once price data becomes available.
 
-Considering the lack of current market data for the stocks in your portfolio, it might be best to hold onto your positions and wait for more information before making any changes. Keep an eye on market conditions and news that may impact your holdings.
+4. **CSBR (Champions Oncology, Inc.):**
+   - Hold onto your 3 shares of CSBR, and consider setting a stop-loss to manage risk once pricing information is accessible.
+
+5. **Available Cash:**
+   - With $7.43 in cash, you may consider looking for potential new micro-cap opportunities once market data is available. Conduct thorough research before making any new purchases.
+
+Please ensure to monitor the market closely for any updates on the stocks in your portfolio and be prepared to act accordingly. Remember, the key is to make informed decisions based on market conditions and your investment objectives.
