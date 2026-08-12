@@ -1,9 +1,11 @@
-Given the current market conditions and the lack of available market data, it is challenging to make informed decisions on your portfolio. However, I would recommend the following based on your current holdings:
+Given the current market conditions and the lack of available data, it is challenging to make informed decisions on your portfolio. However, here are some recommendations based on your current holdings:
 
-1. **Hold all current positions:** Since we do not have the current price data for your holdings, it is best to hold onto them until we have more information to make a decision.
+1. ATYR: Hold your position with a stop-loss at $0.01 until we have more market data available.
 
-2. **Monitor stop-loss levels:** Given the volatile nature of micro-cap stocks, it is crucial to keep an eye on your stop-loss levels and adjust them accordingly once we have access to the latest market data.
+2. BETR: Hold your position with a stop-loss at $0.01 until we have more market data available.
 
-3. **Maintain cash balance:** With a limited cash balance of $7.43, it may be prudent to hold onto it for potential buying opportunities once the market data becomes available.
+3. CCLD: Hold your position with a stop-loss at $0.01 until we have more market data available.
 
-Please note that these recommendations are based on the current lack of market data, and it is essential to reassess your portfolio once the necessary information is accessible. Keep monitoring the market closely for any updates that may impact your holdings.
+4. CSBR: Hold your position with a stop-loss at $0.01 until we have more market data available.
+
+Given the limited information and cash balance, it might be prudent to wait for more market data before making any significant changes to your portfolio. Please stay tuned for further updates.
